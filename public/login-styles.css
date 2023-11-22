@@ -1,0 +1,105 @@
+.left {
+    float: left;
+    width: 50%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.right {
+    width: 50%;
+    background-color: orangered;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    float: right;
+    display: flex;
+    justify-content: center;
+}
+
+.left-container {
+    text-align: center;
+    width: 400px;
+}
+
+.right-container {
+    text-align: center;
+}
+
+.username-field {
+    display: block;
+    margin: 0 auto;  
+    padding: 12px;
+    width: 70%;
+    border: 0px;
+    background-color: lightgray;
+}
+
+.password-field {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;  
+    padding: 12px;
+    width: 70%;
+    border: 0px;
+    background-color: lightgray;
+}
+
+.login-header {
+    padding: 25px;
+    margin-top: 200px;
+    font-size: 45px;
+}
+
+.login-btn {
+    border-radius: 13px;
+    margin-top: 20px;
+    width: 150px;
+    font-size: 15px;
+    border: 0px;
+    color: white;
+    background-color: #FF4500;
+    height: 40px;
+}
+
+.login-btn:hover {
+    background-color: #ff4400a9;
+}
+
+.h1-right {
+    margin-top: 250px;
+    font-size: 60px;
+    color: white;
+}
+
+.introduction {
+    padding: 40px;
+    color: white;
+    font-size: 20px;
+}
+
+.underline {
+    position: relative;
+    top: -30px;
+    color: gray;
+}
+
+.signup-btn {
+    border-radius: 13px;
+    width: 150px;
+    font-size: 15px;
+    border: 0px;
+    color: white;
+    background-color: #FF4500;
+    height: 40px;
+    position: relative;
+    top: -25px;
+}
+
+.signup-btn:hover {
+    background-color: #ff4400a9;
+}

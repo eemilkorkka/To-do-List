@@ -4,8 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo</title>
+    <link rel="stylesheet" type="text/css" href="../signup-styles.css">
 </head>
 <body>
-    <h1>Signup-page</h1>
+    <div class="main">
+        <div class="signup-container">
+            <h1 class="signup-header">Create Account</h1>
+            <form class="input-form" action="/signup" method="post" onsubmit="return validatePasswords()">
+                <input type="text" placeholder="Name" class="name-field" name="name" required>
+                <input type="text" placeholder="Username" class="username-field" name="username" required>
+                <input type="password" placeholder="Password" class="password-field" name="password" id="pass" required>
+                <input type="password" placeholder="Confirm password" class="confirm-password" name="confirmpassword" id="confirmPass" required>
+                <button class="signup-btn">Sign up</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function validatePasswords() {
+            let password = document.getElementById("pass").value;
+            let confirmPassword = document.getElementById("confirmPass").value;
+
+            if (password != confirmPassword) {
+                alert("Passwords do not match!");
+                return false;
+            } else if (password.length < 8) {
+                alert("Password must at least be 8 characters long.");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 </body>
 </html>

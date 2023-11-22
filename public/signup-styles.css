@@ -1,0 +1,78 @@
+body {
+    background-color: orangered;
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.signup-container {
+    text-align: center;
+    margin-top: 150px;
+    padding: 25px;
+    background-color: white;
+    border-radius: 20px;
+    width: 500px;
+}
+
+.name-field {
+    display: block;
+    margin: 0 auto;  
+    padding: 12px;
+    width: 70%;
+    border: 0px;
+    background-color: lightgray;
+}
+
+.username-field {
+    display: block;
+    margin: 0 auto;  
+    padding: 12px;
+    width: 70%;
+    border: 0px;
+    margin-top: 20px;
+    background-color: lightgray;
+}
+
+.password-field {
+    display: block;
+    margin: 0 auto;  
+    padding: 12px;
+    width: 70%;
+    border: 0px;
+    margin-top: 20px;
+    background-color: lightgray;
+}
+
+.confirm-password {
+    display: block;
+    margin: 0 auto;  
+    padding: 12px;
+    width: 70%;
+    border: 0px;
+    margin-top: 20px;
+    background-color: lightgray;
+}
+
+.signup-btn {
+    border-radius: 13px;
+    margin-top: 30px;
+    width: 150px;
+    font-size: 15px;
+    border: 0px;
+    color: white;
+    background-color: #FF4500;
+    height: 40px;
+}
+
+.signup-btn:hover {
+    background-color: #ff4400a9;
+}
+
+.signup-header {
+    font-size: 30px;
+    position: relative;
+    top: -15px;
+}
