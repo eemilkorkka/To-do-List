@@ -23,16 +23,18 @@ router.post("/", async (req, res) => {
                 const resetCodeExpiry = results[0].ResetCodeExpiry;
 
                 if (resetCodeExpiry < Date.now()) {
-                    res.render("Password reset request expired.");
+                    res.send("Password reset code expired.");
                 } else {
                     if (verificationCode == resetCode) {
-
-                        // Password reset was successful
                         const salt = await bcrypt.genSalt(10);
                         const secretPass = await bcrypt.hash(password, salt);
                         
                         connection.query("UPDATE Users SET Password = ? WHERE Username = ?", [secretPass, username]);
+
+                        // Password reset was successful
                         res.redirect("/");
+                    } else {
+                        res.send("Invalid verification code.");
                     }
                 }
             }
