@@ -36,6 +36,16 @@ body {
     background-color: lightgray;
 }
 
+.email-field {
+    display: block;
+    margin: 0 auto;  
+    padding: 12px;
+    width: 70%;
+    border: 0px;
+    margin-top: 20px;
+    background-color: lightgray;
+}
+
 .password-field {
     display: block;
     margin: 0 auto;  
@@ -69,10 +79,4 @@ body {
 
 .signup-btn:hover {
     background-color: #ff4400a9;
-}
-
-.signup-header {
-    font-size: 30px;
-    position: relative;
-    top: -15px;
 }

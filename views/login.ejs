@@ -5,17 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@800&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <style>
+        .login-header {
+            padding: 25px;
+            margin-top: 200px;
+            font-size: 45px;
+            font-family: 'Lexend Deca', sans-serif;
+        }
+
+        .signup-header {
+            margin-top: 225px;
+            font-size: 60px;
+            color: white;
+            font-family: 'Lexend Deca', sans-serif;
+        }
+        .introduction {
+            padding: 40px;
+            color: white;
+            font-size: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }  
+        .forgot-pass {
+            color: gray;
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
     <div class="left">
         <div class="left-container">
             <h1 class="login-header">Login</h1>
             <form class="input-form" action="/" method="post">
                 <input type="text" placeholder="Username" class="username-field" name="username" required>
                 <input type="password" placeholder="Password" class="password-field" name="password" required>
-                <a href="#" style="text-decoration: none; color: gray;"><p class="forgot-pass">Forgot your password?</p></a>
+                <a href="forgot-password" style="text-decoration: none;"><p class="forgot-pass">Forgot your password?</p></a>
                 <a href="/"><button class="login-btn">Log in</button></a>
-                <p style="color: gray;">OR</p>
+                <p style="color: gray; font-family: 'Montserrat', sans-serif;">OR</p>
                 <p class="underline">____________________</p>
             </form>
             <a href="/signup"><button class="signup-btn">Sign up</button></a>
@@ -23,7 +54,7 @@
     </div>
     <div class="right">
        <div class="right-container">
-            <h1 class="h1-right">To-do List App</h1>
+            <h1 class="signup-header">To-do List App</h1>
             <p class="introduction">Welcome to our to-do list application! We're here to help you stay organized, focused, and on top of your tasks. To get started, please log in to your account or create a new one if you're new here. Let's make managing your tasks a breeze!</p>
        </div>
     </div>

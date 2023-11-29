@@ -1,15 +1,15 @@
 const express = require("express");
 const app = express();
-const bcrypt = require("bcryptjs");
 const bodyParser = require("body-parser");
 const signupRouter = require("./routes/signup");
 const homeRouter = require("./routes/home");
 const loginRouter = require("./routes/login");
-const connection = require("./database");
+const forgotPasswordRouter = require("./routes/forgot-password");
+const resetPasswordRouter = require("./routes/reset-password");
 const session = require("express-session");
 
 app.use(session({
-    secret: "your_secret",
+    secret: "fkAKGHarhgpHFIMVncgs823GJhs6fk0jgpXcv532",
     resave: false,
     saveUninitialized: false
 }));
@@ -29,11 +29,14 @@ app.get("/", (req, res) => {
 
 app.get("/logout", (req, res) => {
     req.session.isLoggedIn = false;
+    req.session.username = null;
     res.redirect("/");
 });
 
 app.use("/", loginRouter);
-app.use("/signup", signupRouter);
+app.use("/signup", signupRouter.router);
 app.use("/home", homeRouter);
+app.use("/forgot-password", forgotPasswordRouter);
+app.use("/reset-password", resetPasswordRouter);
 
-app.listen(5500, console.log("App listening on port 5500"));
+app.listen(3000, console.log("App listening on port 3000"));
