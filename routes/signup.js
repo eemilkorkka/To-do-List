@@ -4,10 +4,10 @@ const router = express.Router()
 const connection = require("../database");
 
 router.get("/", (req, res) => {
-    res.render("signup");
+    res.render("signup", { errorMessage: null });
 }); 
 
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
     try {
         let name = req.body.name;
         let email = req.body.email;
@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 
         emailExists(email, async (exists) => {
             if (exists) {
-                res.send("An account with the email you entered already exists. Use a different email.");
+                res.render("signup", { errorMessage: "An account with the email you entered already exists. Use a different email." });
             } else {
                 const salt = await bcrypt.genSalt(10);
                 const secretPass = await bcrypt.hash(password, salt);

@@ -5,10 +5,10 @@ const bcrypt = require("bcryptjs");
 const connection = require("../database");
 
 router.get("/", (req, res) => {
-    res.render("resetpassword");
+    res.render("resetpassword", { errorMessage: null });
 });
 
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     let verificationCode = req.body.verificationCode;
@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
                 const resetCodeExpiry = results[0].ResetCodeExpiry;
 
                 if (resetCodeExpiry < Date.now()) {
-                    res.send("Password reset code expired.");
+                    res.render("resetpassword", { errorMessage: "Password reset code expired" });
                 } else {
                     if (verificationCode == resetCode) {
                         const salt = await bcrypt.genSalt(10);
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
                         // Password reset was successful
                         res.redirect("/");
                     } else {
-                        res.send("Invalid verification code.");
+                        res.render("resetpassword", { errorMessage: "Invalid verification code "});
                     }
                 }
             }

@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: orangered;
+}
+
+.logout-btn {
+    padding: 12px;
+    width: 100px;
+    margin-right: 30px;
+    background-color: orangered;
+    border: 1px solid white;
+    color: white;
+}
+
+.logout-btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.todo-container {
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    width: 35%;
+    padding-top: 25px;
+}

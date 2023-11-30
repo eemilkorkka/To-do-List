@@ -17,45 +17,10 @@ body {
     width: 500px;
 }
 
-.name-field {
-    display: block;
-    margin: 0 auto;  
-    padding: 12px;
-    width: 70%;
-    border: 0px;
-    background-color: lightgray;
-}
-
-.username-field {
-    display: block;
-    margin: 0 auto;  
-    padding: 12px;
-    width: 70%;
-    border: 0px;
-    margin-top: 20px;
-    background-color: lightgray;
-}
-
-.email-field {
-    display: block;
-    margin: 0 auto;  
-    padding: 12px;
-    width: 70%;
-    border: 0px;
-    margin-top: 20px;
-    background-color: lightgray;
-}
-
-.password-field {
-    display: block;
-    margin: 0 auto;  
-    padding: 12px;
-    width: 70%;
-    border: 0px;
-    margin-top: 20px;
-    background-color: lightgray;
-}
-
+.name-field,
+.email-field,
+.username-field,
+.password-field,
 .confirm-password {
     display: block;
     margin: 0 auto;  

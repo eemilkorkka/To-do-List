@@ -41,6 +41,9 @@
     <div class="left">
         <div class="left-container">
             <h1 class="login-header">Login</h1>
+            <% if (errorMessage) { %>
+                <label style="color: red;"><%= errorMessage %></label>
+            <% } %>
             <form class="input-form" action="/" method="post">
                 <input type="text" placeholder="Username" class="username-field" name="username" required>
                 <input type="password" placeholder="Password" class="password-field" name="password" required>

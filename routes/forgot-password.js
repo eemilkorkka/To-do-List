@@ -19,10 +19,10 @@ const transporter = nodemailer.createTransport({
 let resetCode = 0;
 
 router.get("/", (req, res) => {
-    res.render("forgotpassword");
+    res.render("forgotpassword", { errorMessage: null });
 });
 
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
     let email = req.body.email;
     resetCode = Math.floor((Math.random() * 999999) + 100000);
     const expirationDate = Date.now() + 3600000;
@@ -42,14 +42,14 @@ router.post("/", async (req, res) => {
             transporter.sendMail(message, (error, res) => {
                 if (error) {
                     console.log(error);
-                    res.status(500).send("Failed to send password reset email");
+                    res.render("forgotpassword", { errorMessage: "Failed to send password reset email" });
                 } else {
                     // TODO: Fix a bug where the page just keeps loading and won't redirect after clicking on the send email button.
                     res.redirect("/reset-password");
                 }
             });
         } else {
-            res.send("No account registered with the email you provided.");
+            res.render("forgotpassword", { errorMessage: "No account registered with the email you provided" });
         }
     });
 });

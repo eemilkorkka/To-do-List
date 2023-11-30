@@ -3,10 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@800&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
     <title>Home</title>
 </head>
 <body>
-    <h1>Todo-page</h1>
-    <a href="/logout"><button class="logout-btn">Log out</button></a>
+    <nav>
+        <h1 style="color: white; font-size: 28px; margin-left: 30px; font-family: 'Lexend Deca', sans-serif;">TodoList</h1>
+        <a href="/logout"><button class="logout-btn" style="font-family: 'Montserrat', sans-serif;">Log out</button></a>
+    </nav>
+    <div class="todo-container">
+        <form class="input-form" action="/home" method="post">
+            <input type="text" placeholder="Title" class="todo-title" name="todoTitle" required>
+            <input type="text" placeholder="Description" class="todo-description" name="todoDescription" required>
+            <button class="todo-btn">Add</button>
+            <ul>
+                <% newItems.forEach(todo => { %>
+                    <li>
+                        <h3><%= todo.TodoTitle %></h3>
+                        <p><%= todo.TodoDescription %></p>
+                    </li>
+                <% }); %>        
+            </ul>
+        </form>
+    </div>
 </body>
 </html>

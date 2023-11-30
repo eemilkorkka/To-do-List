@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
     if (req.session.isLoggedIn) {
         res.redirect("/home");
     } else {
-        res.render("login");
+        res.render("login", { errorMessage: null });
     }
 });
 

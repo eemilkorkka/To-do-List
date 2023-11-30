@@ -30,19 +30,10 @@
     text-align: center;
 }
 
-.username-field {
-    display: block;
-    margin: 0 auto;  
-    padding: 12px;
-    width: 70%;
-    border: 0px;
-    background-color: lightgray;
-}
-
+.username-field,
 .password-field {
     display: block;
-    margin: 0 auto;
-    margin-top: 20px;  
+    margin: 0 auto;  
     padding: 12px;
     width: 70%;
     border: 0px;

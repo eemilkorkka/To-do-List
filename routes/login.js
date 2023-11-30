@@ -23,11 +23,11 @@ router.post("/", (req, res) => {
                     req.session.username = username;
                     res.redirect("/home");
                 } else {
-                    res.status(401).send("Invalid email or password");
+                    res.render("login", { errorMessage: "Invalid username or password" });
                 }
             });
         } else {
-            res.send("User not found.");
+            res.render("login", { errorMessage: "User not found" });
         }
     });
 });
