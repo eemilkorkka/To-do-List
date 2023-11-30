@@ -24,7 +24,6 @@ router.post("/", (req, res) => {
     const todoTitle = req.body.todoTitle;
     const todoDescription = req.body.todoDescription;
     const newTodo = { title: todoTitle, description: todoDescription };
-    const todoID = Math.random().toString(16).slice(2);
     
     todoItems.push(newTodo);
 
@@ -33,7 +32,7 @@ router.post("/", (req, res) => {
             console.log(error);
         } else {
             // Insert todo into the database
-            connection.query("INSERT INTO Todos (TodoID, TodoTitle, TodoDescription, UserID) VALUES (?, ?, ?, ?)", [todoID, todoTitle, todoDescription, userID]);
+            connection.query("INSERT INTO Todos (TodoTitle, TodoDescription, UserID) VALUES (?, ?, ?)", [todoTitle, todoDescription, userID]);
         }
     });
 
