@@ -13,7 +13,8 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-async function sendPasswordResetEmail(email, callback) {
+const sendPasswordResetEmail = async (req, res) => {
+    const email = req.body.email;
     const expirationDate = Date.now() + 3600000;
     const resetCode = Math.floor((Math.random() * 999999) + 100000);
 
@@ -31,21 +32,25 @@ async function sendPasswordResetEmail(email, callback) {
 
             transporter.sendMail(message, (error, res) => {
                 if (error) {
-                    callback(error, null);
+                    console.log(error);
+                    res.status(500).send("An error occured whilst trying to send email.");
                 } else {
-                    callback(null, res);
+                    res.redirect("/reset-password");
                 }
             });
         } else {
-            callback("No account registered with the email provided", null);
+            res.render("forgotpassword", { errorMessage: "No account registered with the email you provided" });
         }
     });
 }
 
-function resetPassword(username, password, verificationCode, callback) {
+const resetPassword = (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const verificationCode = req.body.verificationCode;
+
     connection.query("SELECT ResetCode, ResetCodeExpiry FROM Users WHERE Username = ?", [username], async (error, results) => {
         if (error) {
-            console.log(error);
             res.status(500).send("An error occured whilst executing SQL query.");
         } else {
             if (results.length > 0) {
@@ -53,22 +58,18 @@ function resetPassword(username, password, verificationCode, callback) {
                 const resetCodeExpiry = results[0].ResetCodeExpiry;
 
                 if (resetCodeExpiry < Date.now()) {
-                    callback("Password reset code expired", null);
+                    res.render("resetpassword", { errorMessage: "Password reset code expired" });
                 } else {
                     if (verificationCode == resetCode) {
                         const salt = await bcrypt.genSalt(10);
                         const secretPass = await bcrypt.hash(password, salt);
                         
-                        connection.query("UPDATE Users SET Password = ? WHERE Username = ?", [secretPass, username], (error, results) => {
-                            if (error) {
-                                callback(error, null);
-                            } else {
-                                 // Password reset was successful
-                                callback(null, results);
-                            }
-                        });
+                        connection.query("UPDATE Users SET Password = ? WHERE Username = ?", [secretPass, username]);
+
+                        // Password reset was successful
+                        res.redirect("/");
                     } else {
-                        callback("Invalid verification code", null);
+                        res.render("resetpassword", { errorMessage: "Invalid verification code "});
                     }
                 }
             }

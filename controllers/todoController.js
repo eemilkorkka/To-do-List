@@ -1,23 +1,41 @@
 const connection = require("../database");
 
-function getTodos(userID, callback) {
-    connection.query("SELECT * FROM Todos WHERE UserID = ?", [userID], (error, results) => {
-        if (error) {
-            return callback(error, null);
-        } else {
-            callback(null, results);
-        }
-    });
+const todoItems = [];
+
+const getTodos = (req, res) => {
+    if (req.session.isLoggedIn) {
+        
+        // Display the user's todos on the site
+        connection.query("SELECT * FROM Todos WHERE UserID = ?", [req.session.userID], (error, todos) => {
+            if (error) {
+                res.status(500).send("An error occured whilst trying to access webpage.");
+            } else {
+                if (todos.length > 0) {
+                    res.render("home", { newItems: todos });
+                } else {
+                    res.render("home", { newItems: [] });
+                }
+            }
+        });
+    } else {
+        res.redirect("/");
+    }
 }
 
-function createTodo(todoTitle, todoDescription, userID, callback) {
-    connection.query("INSERT INTO Todos (TodoTitle, TodoDescription, UserID) VALUES (?, ?, ?)", [todoTitle, todoDescription, userID], (error, results) => {
+const createTodo = (req, res) => {
+    const todoTitle = req.body.todoTitle;
+    const todoDescription = req.body.todoDescription;
+    const newTodo = { title: todoTitle, description: todoDescription };
+    
+    todoItems.push(newTodo);
+
+    connection.query("INSERT INTO Todos (TodoTitle, TodoDescription, UserID) VALUES (?, ?, ?)", [todoTitle, todoDescription, req.session.userID], (error, results) => {
         if (error) {
-            callback(error, null);
-        } else {
-            callback(null, results);
+            res.status(500).send("An error occured whilst trying to create new todo");
         }
     });
+
+    res.redirect("/");
 }
 
 module.exports = { getTodos, createTodo };
