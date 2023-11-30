@@ -1,7 +1,8 @@
 const express = require("express")
-const bcrypt = require("bcryptjs");
 const router = express.Router()
-const connection = require("../database");
+const authenticationController = require("../controllers/authenticationController");
+const todoController = require("../controllers/todoController");
+const userController = require("../controllers/userController");
 
 router.get("/", (req, res) => {
     res.render("login");
@@ -11,23 +12,23 @@ router.post("/", (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     
-    connection.query("SELECT Password FROM Users WHERE Username = ?", [username], (error, results) => {
-        if (error) throw error;
-
-        if (results.length > 0) {
-            const hashedPassword = results[0].Password;
-
-            bcrypt.compare(password, hashedPassword, (error, passwordMatch) => {
-                if (passwordMatch) {
-                    req.session.isLoggedIn = true;
-                    req.session.username = username;
-                    res.redirect("/home");
-                } else {
-                    res.render("login", { errorMessage: "Invalid username or password" });
-                }
-            });
+    userController.getUserId(username, (error, userID) => {
+        if (error) {
+            console.log(error);
         } else {
-            res.render("login", { errorMessage: "User not found" });
+            req.session.userID = userID;
+        }
+    })
+
+    authenticationController.login(username, password, (error, results) => {
+        if (error) {
+            res.render("login", { errorMessage: error });
+        } else {
+            // Login successful
+            req.session.isLoggedIn = true;
+            req.session.username = username;
+            console.log(req.session.userID);
+            res.redirect("/home");
         }
     });
 });

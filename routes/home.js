@@ -1,20 +1,22 @@
 const express = require("express");
 const router = express.Router()
-const connection = require("../database");
+const todoController = require("../controllers/todoController");
+const userController = require("../controllers/userController");
 
 const todoItems = [];
 
 router.get("/", (req, res) => {
     if (req.session.isLoggedIn) {
-        fetchUserTodos(req.session.username, req, (error, todos) => {
+
+        // Display the user's todos on the site
+        todoController.getTodos(req.session.userID, (error, todos) => {
             if (error) {
                 console.log(error);
                 res.render("home", { newItems: [] });
             } else {
-                console.log(todos);
                 res.render("home", { newItems: todos });
             }
-        })
+        });
     } else {
         res.redirect("/");
     }
@@ -27,45 +29,13 @@ router.post("/", (req, res) => {
     
     todoItems.push(newTodo);
 
-    getUserId(req.session.username, (error, userID) => {
+    todoController.createTodo(todoTitle, todoDescription, req.session.userID, (error, results) => {
         if (error) {
             console.log(error);
-        } else {
-            // Insert todo into the database
-            connection.query("INSERT INTO Todos (TodoTitle, TodoDescription, UserID) VALUES (?, ?, ?)", [todoTitle, todoDescription, userID]);
         }
     });
 
     res.redirect("/");
 });
-
-function getUserId(username, callback) {
-    connection.query("SELECT UserID FROM Users WHERE Username = ?", [username], (error, results) => {
-        if (error) return callback(error, null);
-
-        if (results.length > 0) {
-            const userID = results[0].UserID;
-            callback(null, userID);
-        } else {
-            callback(new Error("User not found"), null);
-        }
-    });
-}
-
-function fetchUserTodos(userID, req, callback) {
-    getUserId(req.session.username, (error, userID) => {
-        if (error) {
-            return callback(error, null);
-        } else {
-            connection.query("SELECT * FROM Todos WHERE UserID = ?", [userID], (error, results) => {
-                if (error) {
-                    return callback(error, null);
-                } else {
-                    callback(null, results);
-                }
-            });
-        }
-    });
-}
 
 module.exports = router

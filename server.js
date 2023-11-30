@@ -34,7 +34,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.use("/", loginRouter);
-app.use("/signup", signupRouter.router);
+app.use("/signup", signupRouter);
 app.use("/home", homeRouter);
 app.use("/forgot-password", forgotPasswordRouter);
 app.use("/reset-password", resetPasswordRouter);
