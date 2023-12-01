@@ -71,4 +71,10 @@ const login = (req, res) => {
     });
 }
 
-module.exports = { emailExists, signup, login };
+const logout = (req, res) => {
+    req.session.isLoggedIn = false;
+    req.session.username = null;
+    res.redirect("/");
+}
+
+module.exports = { emailExists, signup, login, logout };

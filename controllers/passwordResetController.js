@@ -33,7 +33,7 @@ const sendPasswordResetEmail = async (req, res) => {
             transporter.sendMail(message, (error, res) => {
                 if (error) {
                     console.log(error);
-                    res.status(500).send("An error occured whilst trying to send email.");
+                    res.status(500).send("An error occurred whilst trying to send email.");
                 } else {
                     res.redirect("/reset-password");
                 }
@@ -51,7 +51,7 @@ const resetPassword = (req, res) => {
 
     connection.query("SELECT ResetCode, ResetCodeExpiry FROM Users WHERE Username = ?", [username], async (error, results) => {
         if (error) {
-            res.status(500).send("An error occured whilst executing SQL query.");
+            res.status(500).send("An error occurred whilst executing SQL query.");
         } else {
             if (results.length > 0) {
                 const resetCode = results[0].ResetCode;

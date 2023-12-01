@@ -19,21 +19,43 @@
     </nav>
     <div class="todo-container">
         <form class="input-form" action="/home" method="post">
-            <input type="text" placeholder="Title" class="todo-title" name="todoTitle" required>
-            <input type="text" placeholder="Description" class="todo-description" name="todoDescription" required>
+            <input type="text" placeholder="Title" class="todo-title" name="todoTitle" id="todoTitle" required>
+            <input type="text" placeholder="Description" class="todo-description" id="todoDesc" name="todoDescription" required>
             <button class="todo-btn">Add</button>
-            <ul>
-                <% newItems.forEach(todo => { %>
-                    <li>
-                        <h3><%= todo.TodoTitle %></h3>
-                        <p><%= todo.TodoDescription %></p>
-                        <input type="checkbox">
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </li>
-                <% }); %>        
-            </ul>
         </form>
+        <ul>
+            <% newItems.forEach(todo => { %>
+                <% const todoID = todo.TodoID %>
+                <li>
+                    <h3><%= todo.TodoTitle %></h3>
+                    <p><%= todo.TodoDescription %></p>
+                    <input type="checkbox" id="checkbox">
+                    <button class="edit-btn" data-id="<%= todoID %>" id="editBtn">Edit</button>
+                    <button class="delete-btn" data-id="<%= todoID %>" id="deleteBtn">Delete</button>
+                </li>
+            <% }); %>        
+        </ul>
     </div>
+    <script>
+        document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("delete-btn")) {
+        const deleteButton = event.target;
+        const todoID = deleteButton.getAttribute("data-id");
+        
+        fetch(`/home/${todoID}`, {
+            method: "DELETE",
+        }).then(response => {
+            if (response.ok) {
+                console.log("Todo was deleted successfully.");
+                deleteButton.parentElement.remove();
+            } else {
+                console.log("An error occurred whilst trying to delete todo.");
+            }
+        }).catch(error => {
+            console.log("Error:", error);
+        });
+    }
+});
+    </script>
 </body>
 </html>

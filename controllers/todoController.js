@@ -8,7 +8,7 @@ const getTodos = (req, res) => {
         // Display the user's todos on the site
         connection.query("SELECT * FROM Todos WHERE UserID = ?", [req.session.userID], (error, todos) => {
             if (error) {
-                res.status(500).send("An error occured whilst trying to access webpage.");
+                res.status(500).send("An error occurred whilst trying to access webpage.");
             } else {
                 if (todos.length > 0) {
                     res.render("home", { newItems: todos });
@@ -31,11 +31,28 @@ const createTodo = (req, res) => {
 
     connection.query("INSERT INTO Todos (TodoTitle, TodoDescription, UserID) VALUES (?, ?, ?)", [todoTitle, todoDescription, req.session.userID], (error, results) => {
         if (error) {
-            res.status(500).send("An error occured whilst trying to create new todo");
+            res.status(500).send("An error occurred whilst trying to create new todo");
         }
     });
 
     res.redirect("/");
 }
 
-module.exports = { getTodos, createTodo };
+const deleteTodo = (req, res) => {
+    const todoID = req.params.todoID;
+
+    connection.query("DELETE FROM Todos WHERE TodoID = ?", [todoID], (error, result) => {
+        if (error) {
+            res.status(500).send("An error occurred whilst trying to delete a todo.");
+        } else {
+            if (result.affectedRows > 1) {
+                res.sendStatus(200);
+            } else {
+                res.send("Failed to delete todo.");
+            }
+        }
+    });
+}
+
+
+module.exports = { getTodos, createTodo, deleteTodo };

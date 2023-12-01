@@ -37,6 +37,7 @@
     padding: 12px;
     width: 70%;
     border: 0px;
+    margin-top: 20px;
     background-color: lightgray;
 }
 
@@ -70,5 +71,6 @@
 }
 
 .signup-btn:hover, .login-btn:hover {
-    background-color: #ff4400a9;
+    background-color: #cc3d00;
+    cursor: pointer;
 }

@@ -20,8 +20,8 @@ nav {
 }
 
 .logout-btn:hover {
-    background-color: white;
-    color: black;
+    cursor: pointer;
+    background-color: #cc3d00;
 }
 
 .todo-container {

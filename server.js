@@ -1,21 +1,23 @@
 const express = require("express");
 const app = express();
+const env = require("dotenv").config();
 const bodyParser = require("body-parser");
 const signupRouter = require("./routes/signup");
 const homeRouter = require("./routes/home");
 const loginRouter = require("./routes/login");
 const forgotPasswordRouter = require("./routes/forgot-password");
 const resetPasswordRouter = require("./routes/reset-password");
+const authenticationController = require("./controllers/authenticationController");
 const session = require("express-session");
 
 app.use(session({
-    secret: "fkAKGHarhgpHFIMVncgs823GJhs6fk0jgpXcv532",
+    secret: process.env.secret,
     resave: false,
     saveUninitialized: false
 }));
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 
@@ -27,11 +29,7 @@ app.get("/", (req, res) => {
     }
 });
 
-app.get("/logout", (req, res) => {
-    req.session.isLoggedIn = false;
-    req.session.username = null;
-    res.redirect("/");
-});
+app.get("/logout", authenticationController.logout);
 
 app.use("/", loginRouter);
 app.use("/signup", signupRouter);
