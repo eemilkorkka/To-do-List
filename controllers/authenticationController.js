@@ -74,6 +74,7 @@ const login = (req, res) => {
 const logout = (req, res) => {
     req.session.isLoggedIn = false;
     req.session.username = null;
+    req.session.userID = null;
     res.redirect("/");
 }
 

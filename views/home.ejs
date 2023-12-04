@@ -25,37 +25,17 @@
         </form>
         <ul>
             <% newItems.forEach(todo => { %>
-                <% const todoID = todo.TodoID %>
+                <% const todoID = todo.TodoID; %>
                 <li>
                     <h3><%= todo.TodoTitle %></h3>
                     <p><%= todo.TodoDescription %></p>
-                    <input type="checkbox" id="checkbox">
-                    <button class="edit-btn" data-id="<%= todoID %>" id="editBtn">Edit</button>
-                    <button class="delete-btn" data-id="<%= todoID %>" id="deleteBtn">Delete</button>
+                    <input type="checkbox" class="todo-checkbox" data_id="<%= todoID %>" id="todoCheckbox">
+                    <button class="delete-btn" data_id="<%= todoID %>" id="deleteBtn">Delete</button>
                 </li>
             <% }); %>        
         </ul>
     </div>
-    <script>
-        document.addEventListener("click", (event) => {
-        if (event.target.classList.contains("delete-btn")) {
-        const deleteButton = event.target;
-        const todoID = deleteButton.getAttribute("data-id");
-        
-        fetch(`/home/${todoID}`, {
-            method: "DELETE",
-        }).then(response => {
-            if (response.ok) {
-                console.log("Todo was deleted successfully.");
-                deleteButton.parentElement.remove();
-            } else {
-                console.log("An error occurred whilst trying to delete todo.");
-            }
-        }).catch(error => {
-            console.log("Error:", error);
-        });
-    }
-});
-    </script>
+    <script src="/deleteTodo.js"></script>
+    <script src="/markTodoAsCompleted.js"></script>
 </body>
 </html>

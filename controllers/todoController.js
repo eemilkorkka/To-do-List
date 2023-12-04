@@ -38,6 +38,22 @@ const createTodo = (req, res) => {
     res.redirect("/");
 }
 
+const updateTodo = (req, res) => {
+    const todoID = req.params.todoID;
+
+    connection.query("UPDATE Todos SET Completed = ? WHERE TodoID = ?", [1, todoID], (error, result) => {
+        if (error) {
+            res.status(500).send("An error occurred whilst trying to mark todo as completed.");
+        } else {
+            if (result.affectedRows > 0) {
+                res.sendStatus(200);
+            } else {
+                res.send("Failed to mark todo as completed");
+            }
+        }
+    });
+}
+
 const deleteTodo = (req, res) => {
     const todoID = req.params.todoID;
 
@@ -55,4 +71,4 @@ const deleteTodo = (req, res) => {
 }
 
 
-module.exports = { getTodos, createTodo, deleteTodo };
+module.exports = { getTodos, createTodo, deleteTodo, updateTodo };

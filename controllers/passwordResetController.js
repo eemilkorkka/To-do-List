@@ -15,6 +15,8 @@ const transporter = nodemailer.createTransport({
 
 const sendPasswordResetEmail = async (req, res) => {
     const email = req.body.email;
+
+    // Reset code will expire within an hour
     const expirationDate = Date.now() + 3600000;
     const resetCode = Math.floor((Math.random() * 999999) + 100000);
 
