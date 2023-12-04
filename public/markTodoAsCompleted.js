@@ -12,7 +12,7 @@ document.addEventListener("click", (event) => {
         }
     
         fetch(`/home/${todoID}`, {
-            method: "PUT",
+            method: "PATCH",
         }).then(response => {
             if (response.ok) {
                 console.log("Response was ok.");
