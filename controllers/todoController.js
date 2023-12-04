@@ -38,17 +38,19 @@ const createTodo = (req, res) => {
     res.redirect("/");
 }
 
-const updateTodo = (req, res) => {
+const editTodo = (req, res) => {
     const todoID = req.params.todoID;
+    const editedTitle = req.body.title;
+    const editedDescription = req.body.description;
 
-    connection.query("UPDATE Todos SET Completed = ? WHERE TodoID = ?", [1, todoID], (error, result) => {
+    connection.query("UPDATE Todos SET TodoTitle = ?, TodoDescription = ? WHERE TodoID = ?", [editedTitle, editedDescription, todoID], (error, result) => {
         if (error) {
-            res.status(500).send("An error occurred whilst trying to mark todo as completed.");
+            return res.status(500).send("An error occurred whilst trying to edit todo.");
         } else {
             if (result.affectedRows > 0) {
                 res.sendStatus(200);
             } else {
-                res.send("Failed to mark todo as completed");
+                res.send("Failed to update todo.");
             }
         }
     });
@@ -70,5 +72,21 @@ const deleteTodo = (req, res) => {
     });
 }
 
+const markTodoAsCompleted = (req, res) => {
+    const todoID = req.params.todoID;
 
-module.exports = { getTodos, createTodo, deleteTodo, updateTodo };
+    connection.query("UPDATE Todos SET Completed = ? WHERE TodoID = ?", [1, todoID], (error, result) => {
+        if (error) {
+            res.status(500).send("An error occurred whilst trying to mark todo as completed.");
+        } else {
+            if (result.affectedRows > 0) {
+                res.sendStatus(200);
+            } else {
+                res.send("Failed to mark todo as completed");
+            }
+        }
+    });
+}
+
+
+module.exports = { getTodos, createTodo, deleteTodo, editTodo, markTodoAsCompleted };

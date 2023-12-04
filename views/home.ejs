@@ -31,11 +31,18 @@
                     <p><%= todo.TodoDescription %></p>
                     <input type="checkbox" class="todo-checkbox" data_id="<%= todoID %>" id="todoCheckbox">
                     <button class="delete-btn" data_id="<%= todoID %>" id="deleteBtn">Delete</button>
+                    <button class="edit-btn" id="editBtn">Edit</button>
+                    <form class="edit-form" style="display: none;">
+                        <input type="text" placeholder="Title" class="edit-title" name="editedTodoTitle" id="editTodoTitle" required>
+                        <input type="text" placeholder="Description" class="edit-description" id="editTodoDesc" name="editedTodoDescription" required>
+                        <button class="save-btn" data_id="<%= todoID %>" id="saveBtn">Save</button>
+                    </form>
                 </li>
             <% }); %>        
         </ul>
     </div>
     <script src="/deleteTodo.js"></script>
     <script src="/markTodoAsCompleted.js"></script>
+    <script src="/editTodo.js"></script>
 </body>
 </html>
