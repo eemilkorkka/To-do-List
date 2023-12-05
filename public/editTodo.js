@@ -1,9 +1,10 @@
-let listItem;
+document.addEventListener("click", handleEditButtonClick);
+document.addEventListener("click", handleSaveButtonClick);
 
-document.addEventListener("click", (event) => {
+function handleEditButtonClick(event) {
     if (event.target.classList.contains("edit-btn")) {
         const editButton = event.target;
-        listItem = editButton.parentElement;
+        const listItem = editButton.parentElement;
         const todoTitle = listItem.querySelector("h3").innerText;
         const todoDescription = listItem.querySelector("p").innerText;
 
@@ -16,7 +17,9 @@ document.addEventListener("click", (event) => {
 
         editForm.style.display = "block";    
     }
+}
 
+function handleSaveButtonClick(event) {
     if (event.target.classList.contains("save-btn")) {    
         const saveButton = event.target;
         const editForm = saveButton.parentElement;
@@ -45,4 +48,4 @@ document.addEventListener("click", (event) => {
             console.log("Error:", error);
         });
     }
-});
+}

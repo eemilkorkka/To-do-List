@@ -14,7 +14,7 @@
 </head>
 <body>
     <nav>
-        <h1 style="color: white; font-size: 28px; margin-left: 30px; font-family: 'Lexend Deca', sans-serif;">TodoList</h1>
+        <h1 style="color: white; font-size: 28px; margin-left: 30px; font-family: 'Lexend Deca', sans-serif;">Todo-List</h1>
         <a href="/logout"><button class="logout-btn" style="font-family: 'Montserrat', sans-serif;">Log out</button></a>
     </nav>
     <div class="todo-container">
@@ -25,17 +25,19 @@
         </form>
         <ul>
             <% newItems.forEach(todo => { %>
-                <% const todoID = todo.TodoID; %>
+                <% const todoID = todo.TodoID;
+                    let completed = todo.Completed; %>
                 <li>
-                    <h3><%= todo.TodoTitle %></h3>
-                    <p><%= todo.TodoDescription %></p>
-                    <input type="checkbox" class="todo-checkbox" data_id="<%= todoID %>" id="todoCheckbox">
+                    <h3 <% if (completed) { %> style="text-decoration: line-through;" <% } %>><%= todo.TodoTitle %></h3>
+                    <p <% if (completed) { %> style="text-decoration: line-through;" <% } %>><%= todo.TodoDescription %></p>
+                    <input type="checkbox" class="todo-checkbox" data_id="<%= todoID %>" <% if (completed) { %> style="display: none;" <% } %> id="todoCheckbox">
                     <button class="delete-btn" data_id="<%= todoID %>" id="deleteBtn">Delete</button>
-                    <button class="edit-btn" id="editBtn">Edit</button>
+                    <button class="edit-btn" id="editBtn" <% if (completed) { %> style="display: none;" <% } %>>Edit</button>
                     <form class="edit-form" style="display: none;">
                         <input type="text" placeholder="Title" class="edit-title" name="editedTodoTitle" id="editTodoTitle" required>
                         <input type="text" placeholder="Description" class="edit-description" id="editTodoDesc" name="editedTodoDescription" required>
                         <button class="save-btn" data_id="<%= todoID %>" id="saveBtn">Save</button>
+                        <button clsas="close-btn" id="closeBtn">Close</button>
                     </form>
                 </li>
             <% }); %>        
