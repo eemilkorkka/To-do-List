@@ -1,10 +1,11 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .left {
     float: left;
     width: 50%;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
     display: flex;
     justify-content: center;
 }
@@ -73,4 +74,57 @@
 .signup-btn:hover, .login-btn:hover {
     background-color: #cc3d00;
     cursor: pointer;
+}
+
+/* CSS for Mobile Devices */
+
+/* General styles remain the same */
+
+/* Media Query for Mobile Devices */
+@media only screen and (max-width: 768px) {
+    .left,
+    .right {
+        width: 100%;
+        position: static;
+        display: block;
+    }
+
+    .left-container,
+    .right-container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .login-header {
+        margin-top: 50px;
+        font-size: 30px;
+    }
+
+    .signup-header {
+        margin-top: 75px;
+        font-size: 40px;
+    }
+
+    .introduction {
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    .username-field,
+    .password-field {
+        width: 90%;
+        margin-top: 15px;
+    }
+
+    .login-btn,
+    .signup-btn {
+        width: 120px;
+        font-size: 13px;
+        height: 35px;
+        top: -20px;
+    }
+
+    .underline {
+        top: -20px;
+    }
 }

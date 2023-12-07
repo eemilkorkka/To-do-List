@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router()
+const router = express.Router();
 const todoController = require("../controllers/todoController");
 
 router.get("/", todoController.getTodos);
@@ -12,4 +12,4 @@ router.put("/:todoID", todoController.editTodo);
 
 router.patch("/:todoID", todoController.markTodoAsCompleted);
 
-module.exports = router
+module.exports = router;
