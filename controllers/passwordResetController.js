@@ -69,6 +69,7 @@ const resetPassword = (req, res) => {
                         connection.query("UPDATE Users SET Password = ? WHERE Username = ?", [secretPass, username]);
 
                         // Password reset was successful
+                        // TODO: Fix this being stuck in an endless load.
                         res.redirect("/");
                     } else {
                         res.render("resetpassword", { errorMessage: "Invalid verification code "});
