@@ -1,6 +1,6 @@
-# Project Title
+# To-do List
 
-A brief description of what this project does and who it's for
+A simple full-stack web based to-do list application created using Express.js and Node.js
 
 ## Tech Stack
 
