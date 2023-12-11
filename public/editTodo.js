@@ -32,6 +32,7 @@ function handleSaveButtonClick(event) {
             description: editedTodoDescription
         };
         
+        // Sending a PUT request to update a todo item on the server
         fetch(`/home/${todoID}`, {
             method: "PUT",
             headers: {

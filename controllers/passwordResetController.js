@@ -23,7 +23,7 @@ const sendPasswordResetEmail = async (req, res) => {
     authenticationContoller.emailExists(email, async (exists) => {
         if (exists) {
             const message = {
-                from: "eemil.korkka@koudata.fi",
+                from: process.env.EMAIL_USER,
                 to: email,
                 subject: "Reset Password Code",
                 text: "You can reset your password for the Todo List App using the following reset code: " + resetCode,

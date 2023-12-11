@@ -10,7 +10,8 @@ document.addEventListener("click", (event) => {
             todoTitle.style.textDecoration = 'line-through';
             todoDescription.style.textDecoration = 'line-through';
         }
-    
+        
+        // Sending a PATCH request to mark a todo item as completed on the server
         fetch(`/home/${todoID}`, {
             method: "PATCH",
         }).then(response => {
