@@ -4,6 +4,10 @@ const bcrypt = require("bcryptjs");
 const env = require("dotenv").config();
 const authenticationContoller = require("./authenticationController");
 
+/* For this to work, you need to have a brevo account that is used to send password reset emails in this project */
+
+// See https://www.programonaut.com/how-to-send-an-email-in-node-js-using-an-smtp-step-by-step/ for more information
+
 const transporter = nodemailer.createTransport({
     host: "smtp-relay.brevo.com",
     port: 587,
