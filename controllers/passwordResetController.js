@@ -24,7 +24,7 @@ const sendPasswordResetEmail = async (req, res) => {
     const expirationDate = Date.now() + 3600000;
     const resetCode = Math.floor((Math.random() * 999999) + 100000);
 
-    authenticationContoller.emailExists(email, async (exists) => {
+    authenticationContoller.emailExists(email, async (exists    ) => {
         if (exists) {
             const message = {
                 from: process.env.EMAIL_USER,
@@ -41,6 +41,7 @@ const sendPasswordResetEmail = async (req, res) => {
                     console.log(error);
                     res.status(500).send("An error occurred whilst trying to send email.");
                 } else {
+                    // TODO: Fix this being stuck in an endless load.   
                     res.redirect("/reset-password");
                 }
             });
@@ -73,7 +74,6 @@ const resetPassword = (req, res) => {
                         connection.query("UPDATE Users SET Password = ? WHERE Username = ?", [secretPass, username]);
 
                         // Password reset was successful
-                        // TODO: Fix this being stuck in an endless load.
                         res.redirect("/");
                     } else {
                         res.render("resetpassword", { errorMessage: "Invalid verification code "});

@@ -62,19 +62,17 @@ const login = (req, res) => {
                     req.session.username = username;
                     res.redirect("/home");
                 } else {
-                    res.render("login", { errorMessage: "Invalid username or password" });
+                    res.render("login", { errorMessage: "Invalid username or password." });
                 }
             });
         } else {
-            res.render("login", { errorMessage: "User not found" });
+            res.render("login", { errorMessage: "User not found!" });
         }
     });
 }
 
 const logout = (req, res) => {
-    req.session.isLoggedIn = false;
-    req.session.username = null;
-    req.session.userID = null;
+    req.session.destroy();
     res.redirect("/");
 }
 

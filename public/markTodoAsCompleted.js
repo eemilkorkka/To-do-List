@@ -17,7 +17,7 @@ document.addEventListener("click", (event) => {
         }).then(response => {
             if (response.ok) {
                 console.log("Response was ok.");
-                listItem.removeChild(checkbox);
+                window.location.href = "http://localhost:3000"
             } else {
                 console.log("Response was not ok.");
             }
