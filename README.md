@@ -4,7 +4,7 @@ A simple full-stack web based to-do list application created using Express.js an
 
 ## Tech Stack
 
-**Client:** HTML, CSS, Javascript
+**Client:** EJS, CSS, Javascript
 
 **Server:** Node.js, Express.js, MySQL
 
