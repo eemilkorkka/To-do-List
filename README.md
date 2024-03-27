@@ -47,6 +47,4 @@ Start the server
   npm run start
 ```
 
-You will also need to have MYSQL installed and use the SQL queries in create_db.txt to create the database necessary for this to work. Additionally, you also need to sign up for a brevo account for the password reset feature to work https://www.brevo.com/.
-
 
