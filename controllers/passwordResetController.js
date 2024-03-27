@@ -24,7 +24,7 @@ const sendPasswordResetEmail = async (req, res) => {
     const expirationDate = Date.now() + 3600000;
     const resetCode = Math.floor((Math.random() * 999999) + 100000);
 
-    authenticationContoller.emailExists(email, async (exists    ) => {
+    authenticationContoller.emailExists(email, async (exists) => {
         if (exists) {
             const message = {
                 from: process.env.EMAIL_USER,
@@ -36,12 +36,13 @@ const sendPasswordResetEmail = async (req, res) => {
             // Insert a password reset code and an expiration date value into the database
             await connection.query("UPDATE Users SET ResetCodeExpiry = ?, ResetCode = ? WHERE Email = ?", [expirationDate, resetCode, email]);
 
-            transporter.sendMail(message, (error, res) => {
+            transporter.sendMail(message, (error, info) => {
                 if (error) {
                     console.log(error);
                     res.status(500).send("An error occurred whilst trying to send email.");
                 } else {
-                    // TODO: Fix this being stuck in an endless load.   
+                    
+                    // Email sent successfully
                     res.redirect("/reset-password");
                 }
             });

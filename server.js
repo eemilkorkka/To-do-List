@@ -11,7 +11,7 @@ const authenticationController = require("./controllers/authenticationController
 const session = require("express-session");
 
 app.use(session({
-    secret: process.env.secret,
+    secret: "topsecret",
     resave: false,
     saveUninitialized: false
 }));
