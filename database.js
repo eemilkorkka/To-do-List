@@ -1,11 +1,8 @@
 const mysql = require("mysql");
 const env = require("dotenv").config();
 
-// See create_db.txt for the necessary MySQL queries for creating the database
-
 const connection = mysql.createConnection({
 
-    // Change these accordingly if needed to match your credentials
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
