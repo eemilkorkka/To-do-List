@@ -17,7 +17,7 @@ document.addEventListener("click", (event) => {
         }).then(response => {
             if (response.ok) {
                 console.log("Response was ok.");
-                window.location.href = "http://localhost:3000"
+                window.location.href = window.location.href
             } else {
                 console.log("Response was not ok.");
             }
