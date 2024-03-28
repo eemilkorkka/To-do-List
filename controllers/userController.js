@@ -1,7 +1,7 @@
 const connection = require("../database");
 
 function getUserId(username, callback) {
-    connection.query("SELECT UserID FROM Users WHERE Username = ?", [username], (error, results) => {
+    connection.query("SELECT UserID FROM users WHERE Username = ?", [username], (error, results) => {
         if (error) return callback(error, null);
 
         if (results.length > 0) {

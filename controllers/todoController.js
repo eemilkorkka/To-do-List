@@ -6,7 +6,7 @@ const getTodos = (req, res) => {
     if (req.session.isLoggedIn) {
         
         // Display the user's todos on the site
-        connection.query("SELECT * FROM Todos WHERE UserID = ?", [req.session.userID], (error, todos) => {
+        connection.query("SELECT * FROM todos WHERE UserID = ?", [req.session.userID], (error, todos) => {
             if (error) {
                 res.status(500).send("An error occurred whilst trying to access webpage.");
             } else {
@@ -29,7 +29,7 @@ const createTodo = (req, res) => {
     
     todoItems.push(newTodo);
 
-    connection.query("INSERT INTO Todos (TodoTitle, TodoDescription, UserID) VALUES (?, ?, ?)", [todoTitle, todoDescription, req.session.userID], (error, results) => {
+    connection.query("INSERT INTO todos (TodoTitle, TodoDescription, UserID) VALUES (?, ?, ?)", [todoTitle, todoDescription, req.session.userID], (error, results) => {
         if (error) {
             res.status(500).send("An error occurred whilst trying to create new todo");
         }
@@ -43,7 +43,7 @@ const editTodo = (req, res) => {
     const editedTitle = req.body.title;
     const editedDescription = req.body.description;
 
-    connection.query("UPDATE Todos SET TodoTitle = ?, TodoDescription = ? WHERE TodoID = ?", [editedTitle, editedDescription, todoID], (error, result) => {
+    connection.query("UPDATE todos SET TodoTitle = ?, TodoDescription = ? WHERE TodoID = ?", [editedTitle, editedDescription, todoID], (error, result) => {
         if (error) {
             return res.status(500).send("An error occurred whilst trying to edit todo.");
         } else {
@@ -59,7 +59,7 @@ const editTodo = (req, res) => {
 const deleteTodo = (req, res) => {
     const todoID = req.params.todoID;
 
-    connection.query("DELETE FROM Todos WHERE TodoID = ?", [todoID], (error, result) => {
+    connection.query("DELETE FROM todos WHERE TodoID = ?", [todoID], (error, result) => {
         if (error) {
             res.status(500).send("An error occurred whilst trying to delete a todo.");
         } else {
@@ -75,7 +75,7 @@ const deleteTodo = (req, res) => {
 const markTodoAsCompleted = (req, res) => {
     const todoID = req.params.todoID;
 
-    connection.query("UPDATE Todos SET Completed = ? WHERE TodoID = ?", [1, todoID], (error, result) => {
+    connection.query("UPDATE todos SET Completed = ? WHERE TodoID = ?", [1, todoID], (error, result) => {
         if (error) {
             res.status(500).send("An error occurred whilst trying to mark todo as completed.");
         } else {

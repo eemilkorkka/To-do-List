@@ -34,7 +34,7 @@ const sendPasswordResetEmail = async (req, res) => {
             };
 
             // Insert a password reset code and an expiration date value into the database
-            await connection.query("UPDATE Users SET ResetCodeExpiry = ?, ResetCode = ? WHERE Email = ?", [expirationDate, resetCode, email]);
+            await connection.query("UPDATE users SET ResetCodeExpiry = ?, ResetCode = ? WHERE Email = ?", [expirationDate, resetCode, email]);
 
             transporter.sendMail(message, (error, info) => {
                 if (error) {
@@ -57,7 +57,7 @@ const resetPassword = (req, res) => {
     const password = req.body.password;
     const verificationCode = req.body.verificationCode;
 
-    connection.query("SELECT ResetCode, ResetCodeExpiry FROM Users WHERE Username = ?", [username], async (error, results) => {
+    connection.query("SELECT ResetCode, ResetCodeExpiry FROM users WHERE Username = ?", [username], async (error, results) => {
         if (error) {
             res.status(500).send("An error occurred whilst executing SQL query.");
         } else {
@@ -72,7 +72,7 @@ const resetPassword = (req, res) => {
                         const salt = await bcrypt.genSalt(10);
                         const secretPass = await bcrypt.hash(password, salt);
                         
-                        connection.query("UPDATE Users SET Password = ? WHERE Username = ?", [secretPass, username]);
+                        connection.query("UPDATE users SET Password = ? WHERE Username = ?", [secretPass, username]);
 
                         // Password reset was successful
                         res.redirect("/");

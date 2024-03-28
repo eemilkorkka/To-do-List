@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const userController = require("../controllers/userController");
 
 function emailExists(email, callback) {
-    connection.query("SELECT * FROM Users WHERE Email = ?", [email], (error, results) => {
+    connection.query("SELECT * FROM users WHERE Email = ?", [email], (error, results) => {
         if (error) throw error;
 
         if (results.length > 0) {
@@ -28,7 +28,7 @@ const signup = (req, res) => {
                 const salt = await bcrypt.genSalt(10);
                 const secretPass = await bcrypt.hash(password, salt);
 
-                connection.query("INSERT INTO Users (Name, Email, Username, Password) VALUES (?, ?, ?, ?)", [name, email, username, secretPass]);
+                connection.query("INSERT INTO users (Name, Email, Username, Password) VALUES (?, ?, ?, ?)", [name, email, username, secretPass]);
                 res.redirect("/");
             }
         });
@@ -50,7 +50,7 @@ const login = (req, res) => {
         }
     });
 
-    connection.query("SELECT Password FROM Users WHERE Username = ?", [username], (error, results) => {
+    connection.query("SELECT Password FROM users WHERE Username = ?", [username], (error, results) => {
         if (error) throw error;
 
         if (results.length > 0) {
