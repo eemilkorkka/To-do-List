@@ -21,30 +21,11 @@ A simple full-stack web based to-do list application created using Express.js an
 - Mark todos as completed
 - Delete todos
 
-## Run Locally
+## Live test
 
-Clone the project
+You may test my website at https://todo-demo-conr.onrender.com/
 
-```bash
-  git clone https://github.com/eemilkorkka/To-do-List.git
-```
 
-Go to the project directory
 
-```bash
-  cd To-do-List
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
 
 
